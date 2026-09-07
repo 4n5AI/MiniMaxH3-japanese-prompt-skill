@@ -1,0 +1,6 @@
+interface:
+  display_name: "MiniMax H3 Prompt"
+  short_description: "MiniMax H3 prompts with Japanese lip-sync rules"
+  default_prompt: "Use $minimax-h3-prompt to turn my idea into a production-ready MiniMax H3 prompt."
+policy:
+  allow_implicit_invocation: true
