@@ -6,6 +6,8 @@ Use this guide when MiniMax H3 combines reference images, videos, or audio for r
 
 Inventory every supplied asset before writing. State exactly what each asset controls and what it must not control. One asset may supply several related cues, but name each role explicitly.
 
+Inspect supplied media before describing it. If an asset cannot be accessed, request it or label the output as a draft with explicit placeholders; never invent its identity, dialogue, camera path, or contents. A link to a technique guide is not itself a target video asset.
+
 Use stable labels:
 
 | Label | Use |
@@ -66,6 +68,8 @@ Begin with the applicable bracketed task types, joined with ` + ` and without du
 
 Then summarize the target video and main reference relationships in one short paragraph. Do not introduce new labels here.
 
+Choose types by the operation, not the file extension: completing exact frame anchors is `keyframe completion`; borrowing identity/style/camera cues is `reference generation`; modifying an existing source video is `video editing`; extending its timeline is `video continuation`. For editing, begin the prose with `The target video is an edited version of <Video 1>.` Use `audio reuse` for copied sound and `audio reference` for a newly generated interpretation. A camera-reference video alone does not imply video editing or audio reuse.
+
 ## `retention_analysis`
 
 Use one line per tracked reference and name where it appears. For visible content, use only:
@@ -84,9 +88,13 @@ For audio, use only:
 
 Explain the retained, changed, transferred, copied, or loosely borrowed properties after the marker. Do not claim full preservation when the target intentionally changes a defined feature.
 
+`fully_copy` means the complete source signal is the entire final audio track. Use `partially_copy` when selecting a segment or mixing it with generated layers; `reference` means borrowing qualities rather than copying the signal. Do not request exact copying and rewritten/resynthesized words for the same sound. Video audio is not automatically an enabled audio reference. Keep speaker IDs out of `retention_analysis`.
+
 ## `detailed_description`
 
 State the overall visual style in one or two sentences before `[Shot 1]`. Then describe playback order shot by shot: composition, subject appearance and position, environment, lighting, physical actions and state changes, camera movement, synchronized sound, dialogue, and the exact point where each reference takes effect.
+
+Speaker IDs follow first vocalization across the whole target, independently of subject numbering: `<Subject 2> (S1)` is valid when that subject speaks first. A voice-reference cue does not imply copying its words. Do not invent transcripts for inaudible source speech; mark uncertain words `[unclear]` when a transcript is necessary.
 
 For reference-generation tasks, 350–500 English words is a useful planning range, not a quota. Dialogue-heavy or simple edit tasks should use the length needed to make timing and relationships unambiguous. Never pad the prompt with repeated quality adjectives.
 

@@ -9,7 +9,11 @@ Normalize the content that will actually be vocalized. Do not change:
 - `<d>`, `<scenetrans>`, `<cutoff>`, `[Japanese]`, speaker IDs, shot labels, or field names
 - reference tags such as `<Picture 1>`, `<Video 1>`, `@image1`, and `画像1`
 - URLs, file names, paths, model IDs, API names, or other non-spoken identifiers
-- exact on-screen text, captions, labels, logos, or quoted source text unless the same string is also spoken
+- exact on-screen text, captions, labels, logos, or quoted source text
+
+When visible text is also spoken, keep two versions: the unchanged display string and a pronunciation-normalized audible string. For example, a sign stays `"AI 二千年"`, while the speaker says `エーアイ、2,000年`. These rules apply to Japanese speech, not dialogue explicitly requested in English or another language.
+
+Normalize newly generated speech, not a retained audio waveform. Copying source audio cannot change its pronunciation through spelling; if pronunciation must change, explain that resynthesis or editing is needed and do not claim exact audio reuse.
 
 Inside a `<d>` block, include only the language tag and the normalized words the character actually says.
 
@@ -26,7 +30,7 @@ Examples:
 | Before | After |
 | --- | --- |
 | `躊躇しないで。` | `ちゅうちょしないで。` |
-| `今日の進捗を共有します。` | `きょうの進ちょくを共有します。` |
+| `今日の進捗を共有します。` | `きょうのしんちょくを共有します。` |
 | `彼は暫く黙った。` | `彼はしばらく黙った。` |
 
 When a reading is uncertain, ask the user or include the intended reading in hiragana. Do not guess a person's name.
@@ -63,14 +67,14 @@ When a product or person's preferred pronunciation is unclear, ask instead of in
 Define the speaking subject and stable ID outside the dialogue block, then place the normalized line inside it:
 
 ```text
-The presenter with a clear, measured voice (S1) physically speaks with natural lip movement: <d>[Japanese] きょうは、エーアイの進ちょくを192回目として共有します。</d>
+The presenter with a clear, measured voice (S1) physically speaks with natural lip movement: <d>[Japanese] 192回目の、エーアイのしんちょく報告です。</d>
 ```
 
 For an on-screen speaker, explicitly request natural lip movement and keep the mouth visible long enough for the line. After the line, describe the mouth closing before a new expression or cut when timing matters.
 
 For voiceover, label it as off-screen and state that visible characters' lips remain closed. Do not ask for lip-sync on off-screen narration.
 
-Keep a line short enough to fit the assigned time at a natural speaking rate. If it cannot fit, shorten the wording, extend the duration, or split it across planned shots without changing speaker IDs.
+Estimate whether a line fits its actual speaking window, allowing for pauses and non-speaking action. Pronunciation normalization is not permission to paraphrase user-supplied dialogue. If wording and duration cannot both fit, explain the conflict and offer a shorter variant, longer duration, or split rather than silently changing either requirement. Text normalization reduces ambiguity but does not guarantee pronunciation or lip-sync quality; actual audio needs listening verification.
 
 ## Final Read-Aloud Check
 

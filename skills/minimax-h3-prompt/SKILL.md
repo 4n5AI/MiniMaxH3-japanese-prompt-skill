@@ -16,9 +16,10 @@ Turn the user's intent and supplied media into one copy-ready MiniMax H3 prompt.
    - `L2VA`: supplied last frame only.
    - `Ref2VA`: one or more reference images, videos, or audio clips used for identity, style, motion, camera, editing, voice, sound, or composition.
 2. For `T2VA`, `I2VA`, `FL2VA`, or `L2VA`, read [references/base-modes.md](references/base-modes.md) completely before writing.
-3. For `Ref2VA`, read [references/reference-mode.md](references/reference-mode.md) completely before writing. Also read the base guide when shot, camera, dialogue, or sound rules are needed.
+3. For `Ref2VA`, read [references/reference-mode.md](references/reference-mode.md) and the shared timeline, camera, dialogue, and audio sections of the base guide. Use the six-section Ref2VA structure, not the base three-field structure.
 4. Whenever the request includes spoken words, singing, voiceover, pronunciation, or lip-sync, read [references/japanese-dialogue.md](references/japanese-dialogue.md) completely. This is mandatory even when the user asks only for a revised line of dialogue in a follow-up.
-5. Read [references/sources.md](references/sources.md) only when checking current specifications, reconciling provider differences, or updating this skill.
+5. For a full visual prompt or a camera/shot revision, read [references/cinematography.md](references/cinematography.md). For camera setups, lenses, or their use cases, also read [references/camera-lenses.md](references/camera-lenses.md). Select only techniques that serve the requested scene; do not load these for dialogue-only changes. Read [references/examples.md](references/examples.md) when a concrete structured example would help.
+6. Read [references/sources.md](references/sources.md) only when checking current specifications, reconciling provider differences, or updating this skill.
 
 ## Choose the Output Profile
 
@@ -26,21 +27,23 @@ Turn the user's intent and supplied media into one copy-ready MiniMax H3 prompt.
 - Use the **surface-natural profile** when the user explicitly targets a simple Hailuo AI, MiniMax Design, or third-party prompt box and wants a concise natural-language prompt. Keep the same mode, timeline, reference-role, camera, dialogue, and sound logic, but omit schema field names that the surface does not need.
 - Do not output both profiles unless the user requests alternatives.
 
+These profiles organize prompt text; their section names are not automatically API request parameters. Do not imply that every provider requires structured text or that every Hailuo surface supports H3. Respect an explicitly requested prompt language and check the target surface before giving integration instructions.
+
 ## Resolve Missing Details
 
 Determine the target surface, duration, aspect ratio, input assets and their roles, must-preserve details, action, camera behavior, dialogue, and audio plan from the request. Ask only when a missing choice would materially change the result or a required reference asset is unavailable. Otherwise choose a reasonable draft assumption and state it in one short line before the prompt.
 
-When neither duration nor format is given, use an 8-second, 16:9 draft unless the intended publishing context clearly implies another choice. Keep every cut and action inside the selected duration. Treat resolution, aspect ratio, and provider controls as settings outside the prompt unless they affect composition or timing.
+In follow-ups, inherit the established mode, duration, format, assets, and creative decisions unless the user changes them. Preserve each supplied setting independently. If still unspecified, an 8-second duration and 16:9 format are optional editorial draft assumptions, not model defaults or capability claims. Keep every cut and action inside the selected duration. Do not silently shorten requested dialogue or truncate a longer sequence to fit a default. Treat resolution, aspect ratio, and provider controls as settings outside the prompt unless they affect composition or timing.
 
 ## Write for Observable Playback
 
 - Describe what the viewer can see and hear in chronological order. Replace abstract mood claims with concrete lighting, color, texture, posture, motion, framing, ambience, and sound.
-- Use one main subject action and one main camera idea per shot unless the user explicitly requests more. Add a cut only when it reveals new information.
+- Give each shot a clear dramatic purpose and a coherent camera path. Coordinated actions, such as tracking while panning to maintain framing or a dolly zoom, are valid; unrelated competing directions are not. Add a cut only when it reveals new information or supports the requested rhythm.
 - For image-driven modes, spend prompt space on motion, state changes, and locked details instead of redundantly inventorying the source image.
 - Give every reference asset a clear role. Keep labels, speaker IDs, identities, wardrobe, props, product geometry, logos, and spatial relationships consistent.
 - Separate synchronized dialogue and diegetic sound from ambience and audience-only music. Use `N/A` for audience-only music when none is wanted.
 - Use targeted constraints such as stable horizon, unchanged logo, or no extra people. Avoid long generic negative lists and contradictory directions.
-- Do not invent rights or permissions for a real person's likeness or voice. If the request is ambiguous, use fictional subjects or ask for confirmation of the intended authorized reference.
+- Do not invent rights or permissions for supplied likeness or voice references, or silently replace the user's subjects.
 
 ## Japanese Lip-Sync Rules
 
