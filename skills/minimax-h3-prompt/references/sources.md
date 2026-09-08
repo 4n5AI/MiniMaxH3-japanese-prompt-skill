@@ -1,6 +1,6 @@
 # Sources and Authority
 
-Reviewed on 2026-09-07.
+Original H3 source review: 2026-09-07. Cinematography/lens additions and upstream prompt-guide comparison: 2026-09-08. This does not imply every provider specification was revalidated on the later date.
 
 Use current official MiniMax documentation and the official model repository as the source of truth. Treat product pages as interface context, third-party guides as practical interpretation, and community posts as anecdotal workflow evidence. When sources conflict, follow the most recent applicable official source and clearly separate provider-specific limits from MiniMax H3 model limits.
 
@@ -60,6 +60,15 @@ Use current official MiniMax documentation and the official model repository as 
 - https://www.reddit.com/r/StableDiffusion/comments/1w8q481/coffee_trying_to_get_cinematic_edits_out_of/
 - Anecdotal observation only: one creator reports iterative enhancement, softer grading, detail repair, and reuse of a clean voice-reference file. Do not turn specific LoRA weights, durations, or one user's workflow into default prompt rules.
 
-## Maintenance Rule
+## Cinematography and Lens Sources
+
+- [CinematographyStoryboards](https://4n5ai.github.io/CinematographyStoryboards/), inspected through its [public source HTML](https://github.com/4n5AI/CinematographyStoryboards/blob/main/index.html) because the hosted page could not be fetched: seven axes covering shot size, angle, movement, optics, time, light, and composition. Adapted into shot-selection decisions; no storyboard images are redistributed.
+- [AIShotStudio: 42 Camera Movements](https://aishotstudio.com/42-camera-movements-ai-prompts/): supplementary movement/reveal vocabulary. Deduplicate overlapping names and separate angle, optics, focus, time effects, and actual camera movement. Examples labeled for other models are not H3 evidence or control tokens. Do not assume optical zoom-out creates background blur.
+- [TAMRON: 画角とは？レンズの使い分けについても知ろう](https://www.tamron.com/jp/consumer/sp/impression/detail/article-what-is-angle-of-view.html): optical grounding for field of view, wide/standard/telephoto use cases, prime versus zoom, and aperture.
+- [TAMRON: 焦点距離とは？画角との関係など基礎知識を解説](https://www.tamron.com/jp/consumer/sp/impression/detail/article-what-is-focal-length.html): supplemental clarification of sensor format and equivalent focal length.
+
+These sources inform filmmaking language, not H3 feature availability. The shot recipes, equipment-selection tables, conflict checks, and examples are editorial adaptations. Focal-length ranges are approximate visual choices, not provider parameters. No claim of model execution fidelity is made without generated-video testing.
+
+## Maintenance
 
 Re-check official documentation before changing model names, limits, API fields, supported modes, or provider availability. Preserve the user's permanent Japanese lip-sync preferences even if upstream examples keep dialogue verbatim.
